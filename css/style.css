@@ -1,0 +1,37 @@
+body {
+    font-family: 'Handlee', serif;
+    font-size: 1.5em;
+}
+
+.navbar-brand {
+    margin-right: 0;
+}
+
+.navbar-brand img {
+    width: 80%;
+    height: auto;
+}
+
+.navbar-collapse {
+    text-align: center;
+}
+
+.title {
+    font-size: 1.3em;
+    text-align: center;
+    margin: 1em;
+}
+
+.card {
+    margin: 1em;
+}
+
+.row-teddy {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+figure {
+    margin-bottom: 0;
+}
