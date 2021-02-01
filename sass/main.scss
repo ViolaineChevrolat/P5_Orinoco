@@ -31,6 +31,17 @@ body {
 
 .card {
     margin: 1em;
+    &-body_teddy{
+        border: 0.8px solid black;
+        margin: 1em;
+    }
+
+}
+
+h2 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 2em;
 }
 
 figure {
@@ -68,3 +79,20 @@ figcaption {
     }
 }
 
+/* animation */
+
+.active-teddy {
+    transition: all 0.3s, ease;
+}
+.active-contenu {
+    animation: clear 0.5s forwards;
+}
+
+@keyframes clear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
