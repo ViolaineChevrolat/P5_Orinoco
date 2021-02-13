@@ -2,6 +2,17 @@ body {
   font-family: handlee, serif;
 }
 
+.container {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.row {
+  margin: 0;
+  justify-content: space-around;
+}
+
 .navbar {
   font-size: 1.5em;
   text-align: center;
@@ -30,10 +41,6 @@ body {
 .card {
   margin: 1em;
 }
-.card-body_teddy {
-  border: 0.8px solid black;
-  margin: 1em;
-}
 
 h2 {
   text-align: center;
@@ -41,28 +48,57 @@ h2 {
   font-size: 2em;
 }
 
-figure {
-  margin-bottom: 0;
-}
-
-figcaption {
-  text-align: center;
-  color: black;
-  font-size: 1.4em;
-  margin-top: 0.8em;
-}
-
 .coordonnees {
+  font-size: 1.5em;
   padding: 1em;
   margin: 0.8em;
   border: 1px solid black;
 }
 
 .style_input {
+  display: block;
+  outline: 0;
+  background: rgb(226,226,226);
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,0.3);
   width: 100%;
-  height: 1em;
-  font-size: 2em;
-  margin-bottom: 0.5em;
+  height: 2em;
+  padding: 10px 0 10px 20px;
+  font-size: 1em;
+}
+
+.message-alerte {
+  margin: 0px 23px;
+  color: red;
+  display: none;
+}
+
+::placeholder {
+  font-size: 0.8em;
+  margin-bottom: 10px
+  /*margin: 10px 0 0 10px;*/
+}
+
+.valide-commande {
+  display: block;
+  margin: 30px auto;
+  outline: 0;
+  background: rgb(241, 187, 232);
+  width: 90%;
+  border: 0;
+  padding: 15px;
+  border-radius: 3px;
+  font-size: 1.8em;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background: rgb(142, 76, 230);
+}
+
+button:active {
+  background: rgb(235, 112, 31);
 }
 
 .list-inline-item {
@@ -73,6 +109,11 @@ figcaption {
 @media (min-width: 992px) {
   .navbar {
     text-align: left;
+  }
+
+  .col12 .col-md-6 {
+    border: 0.8px solid black;
+    margin: 1em;
   }
 }
 /* animation */

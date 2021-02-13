@@ -2,6 +2,17 @@ body {
     font-family: handlee, serif;
 }
 
+.container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.row {
+    margin: 0;
+    justify-content: space-around;
+}
+
 .navbar {
     font-size: 1.5em;
     text-align: center;
@@ -31,11 +42,6 @@ body {
 
 .card {
     margin: 1em;
-    &-body_teddy{
-        border: 0.8px solid black;
-        margin: 1em;
-    }
-
 }
 
 h2 {
@@ -44,16 +50,7 @@ h2 {
     font-size: 2em;
 }
 
-figure {
-    margin-bottom: 0;
-}
 
-figcaption {
-    text-align: center;
-    color: black;
-    font-size: 1.4em;
-    margin-top: 0.8em;
-}
 
 .coordonnees {
     padding: 1em;
@@ -76,6 +73,11 @@ figcaption {
 @media (min-width: 992px) {
     .navbar {
         text-align: left;
+    }
+
+    .col12 .col-md-6 {
+        border: 0.8px solid black;
+        margin: 1em;
     }
 }
 

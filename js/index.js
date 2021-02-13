@@ -1,27 +1,36 @@
 // les ours en page d'accueil
 
-const teddies = document.querySelector('.col-12', '.col-md-6');
+const teddies = document.getElementById('nounours');
+
 
 fetch('http://localhost:3000/api/teddies')
     .then(response => response.json())
     .then(donnees => {
-    
+
 
     for (let i = 0; i < donnees.length; i++) {
+        let newCardTeddy = document.createElement('div');
 
-        var newCardTeddy = document.createElement('div');
-        newCardTeddy.className = `card-body_teddy`;
+        newCardTeddy.className = `col-12 col-md-5`;
+        newCardTeddy.style.alignItems = `center`;
         newCardTeddy.style.cursor = `pointer`;
-   
-        var newName = document.createElement('h2');
-        let newId = document.createElement('h3')
-        var newImageUrl = document.createElement('img');
-        var newColors = document.createElement('p');
-        var newPrice = document.createElement('h3');
-        console.log(newId);
+        newCardTeddy.style.border = `0.5px solid black`;
+        newCardTeddy.style.margin = `1em 0.5em`;
+        newCardTeddy.style.padding = `0`;
+        let newLink = document.createElement('a');
+
+        let newName = document.createElement('h2');
+        let newId = document.createElement('h4')
+        let newImageUrl = document.createElement('img');
+        let newColors = document.createElement('p');
+        let newPrice = document.createElement('h3');
 
         newName.innerText = donnees[i].name;
-        newId.innerText = donnees[i]._id;
+        //newLink.dataset.id = donnees[i]._id;
+        newLink.href = `produits.html?id=${donnees[i]._id}`;
+        console.log(newLink);
+        //newId.innerText = donnees[i]._id;
+        //newId.style.display = 'none';
         newPrice.innerText = `${donnees[i].price} euros`;
         newPrice.style.textAlign = 'center';
         newColors.innerText = `Disponible dans les coloris : ${donnees[i].colors}`;
@@ -33,25 +42,24 @@ fetch('http://localhost:3000/api/teddies')
         newImageUrl.style.marginBottom = '1em';
 
         teddies.appendChild(newCardTeddy);
-        newCardTeddy.insertAdjacentElement('afterbegin', newColors);
-        newCardTeddy.insertAdjacentElement('afterbegin', newPrice);
-        newCardTeddy.insertAdjacentElement('afterbegin', newName);
-        newCardTeddy.insertAdjacentElement('afterbegin', newImageUrl);
-        newCardTeddy.insertAdjacentElement('afterbegin', newId);
+        newCardTeddy.appendChild(newLink);
+        newLink.insertAdjacentElement('afterbegin', newColors);
+        newLink.insertAdjacentElement('afterbegin', newPrice);
+        newLink.insertAdjacentElement('afterbegin', newName);
+        newLink.insertAdjacentElement('afterbegin', newImageUrl);
+        newLink.insertAdjacentElement('afterbegin', newId);
 
-    }
+        //const teddy = document.querySelector('.col-12 .col-md-5');
 
-// selection de chaque ours et ouverture d'une page produit
+        }
 
-    const allTeddies = Array.from(document.querySelectorAll('.card-body_teddy'));
 
-    allTeddies.forEach(teddy => {
-        teddy.addEventListener('click', (e) => {
-            for (let i = 0; i < allTeddies.length; i++){
-            document.location.href="produits.html";
-            allTeddies[i].contains;
-            }
-        })
     })
-});
+
+    .catch((error) => {
+        console.log(error);
+})
+
+
+
 
