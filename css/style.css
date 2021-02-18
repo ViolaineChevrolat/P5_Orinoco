@@ -55,7 +55,7 @@ h2 {
   border: 1px solid black;
 }
 
-.style_input {
+input {
   display: block;
   outline: 0;
   background: rgb(226,226,226);

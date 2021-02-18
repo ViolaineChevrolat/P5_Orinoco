@@ -40,17 +40,26 @@
         <div class="row">
            <div class="col col-4-md">
                <h1 class="title">Récapitulatif de mon panier</h1>
-                <table>
+                <table class="table table-striped">
                     <thead>
-                        <tr>Modèle</tr>
-                        <tr>Quantité</tr>
-                        <tr>Prix</tr>
+                        <tr>
+                            <th>Modèle</th>
+                            <th>Quantité</th>
+                            <th>Prix</th>
+                        </tr>
                     </thead>
                     <tbody class="teddy-list">
+                        <tr>
+                            <td>
 
+                            </td>
+                        </tr>
                     </tbody>
                     <tfoot>
-                        <tr>TOTAL en euros</tr>
+                        <tr>
+                            <td>TOTAL en euros</td>
+
+                        </tr>
                     </tfoot>
                 </table>
            </div>
@@ -60,37 +69,37 @@
                 <legend class="text-center">Mes Coordonnées</legend>
                 <div class="formulaire">
                     <label for="nom">Nom</label>
-                    <input class="style_input" id="nom" name="nom" placeholder="Votre nom" type="text" required/>
-                    <span class="message-alerte">Uniquement des lettres</span>
+                    <input id="nom" name="nom" placeholder="Votre nom" type="text" required/>
+                    <span class="message-alerte">Au moins 3 caractères</span>
                     <br>
                 </div>
                 <div class="formulaire">
                     <label for="prenom">Prénom </label>
-                    <input class="style_input" id="prenom" name="prenom" placeholder="Votre prénom" type="text" required/>
+                    <input id="prenom" name="prenom" placeholder="Votre prénom" type="text" required/>
                     <span class="message-alerte">Uniquement des lettres</span>
                     <br>
                 </div>
                 <div class="formulaire">
                     <label for="mail">Email</label>
-                    <input class="style_input" id="mail" name="mail" placeholder="Votre adresse email" type="email" required/>
+                    <input id="mail" name="mail" placeholder="Votre adresse email" type="email" required/>
                     <span class="message-alerte">Adresse mail non-valide</span>
                     <br>
                 </div>
                 <div class="formulaire">
                     <label>Rue</label>
-                    <input class="style_input" id="rue" name="rue" placeholder="Votre rue" type="text" required/>
+                    <input id="rue" name="rue" placeholder="Votre rue" type="text" required/>
                     <span class="message-alerte">Incrivez votre adresse</span>
                     <br>
                 </div>
                 <div class="formulaire">
                     <label>Code postal</label>
-                    <input class="style_input" id="code-postal" name="code-postal" placeholder="Votre code postal" type="text" required/>
-                    <span class="message-alerte">Uniquement les chiffres composant votre code postal</span>
+                    <input id="code-postal" name="code-postal" placeholder="Votre code postal" type="text" required/>
+                    <span class="message-alerte">Uniquement les 5 chiffres composant votre code postal</span>
                     <br>
                 </div>
                 <div class="formulaire">
                     <label>Ville</label>
-                    <input class="style_input" id="ville" name="ville" placeholder="Votre ville" type="text" required/>  
+                    <input id="ville" name="ville" placeholder="Votre ville" type="text" required/>  
                     <span class="message-alerte">Inscrivez votre ville</span>   
                 </div>       
             </fieldset>
@@ -115,6 +124,7 @@
     
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/panier.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 </body>

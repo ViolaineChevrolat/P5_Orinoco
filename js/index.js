@@ -17,8 +17,8 @@ fetch('http://localhost:3000/api/teddies')
         newCardTeddy.style.border = `0.5px solid black`;
         newCardTeddy.style.margin = `1em 0.5em`;
         newCardTeddy.style.padding = `0`;
+        
         let newLink = document.createElement('a');
-
         let newName = document.createElement('h2');
         let newId = document.createElement('h4')
         let newImageUrl = document.createElement('img');
