@@ -5,74 +5,75 @@ const teddyParams = (new URL(document.location)).searchParams;
 const teddyId = teddyParams.get('id');
 console.log(teddyId);
 
+//recuperation du teddy seul avec l'Id du produit via l'API
 async function teddyFetch() {
-        await fetch('http://localhost:3000/api/teddies/' + teddyId)
-        .then(response => response.json())
-        .then(donnees => {
-            const theTeddy = document.createElement('div');
-            theTeddy.setAttribute("class", "col-12 card text-center");
-            theTeddy.innerHTML = `
-                        <h2>${donnees.name}</h2>
-                        <img src="${donnees.imageUrl}">
-                        <h3 id="prix">${donnees.price} euros</h3>
-                        <h4>Disponible en ${donnees.colors}<h4>
-                        <label for="q">Quantité:</label>
-                        <select id="quantite" name="q">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <button type="button" class="add-teddy">Ajouter au panier</button>
-                        `;
-            theNounours.appendChild(theTeddy);
- 
-            let btn = document.querySelector(".add-teddy");
-            console.log(btn);
+    await fetch('http://localhost:3000/api/teddies/' + teddyId)
+        .then(response => {
+            return response.json();
+        })
+        .then(teddy => {
 
-            function calculQteTeddy(){
+            //création de la fiche produit
+            function theTeddy() {
+                const theTeddy = document.createElement('div');
+
+                //création de la carte produit
+                theTeddy.setAttribute("class", "col-12 card text-center");
+                theTeddy.innerHTML = `
+                            <h2>${teddy.name}</h2>
+                            <img src="${teddy.imageUrl}">
+                            <h3 id="prix">${teddy.price/100} euros</h3>
+                            <p class="text-center">${teddy.description}<p>
+                            <label for="couleurs">Disponible en</label>
+                            <select name="colors" id="colors">
+                            </select><br>
+                            <label for="qte" style= "display: inline">Quantité : </label>
+                            <input id="quantite" name="quantité" type="number" value="1" style= "width: 50px; display: inline"/><br>                                                       
+                            <button type="button" class="add-teddy" style= "margin-top: 1em">Ajouter au panier</button>
+                            `;
+                theNounours.appendChild(theTeddy);
+
+                //selection du coloris
+                function coloris(teddy){
+                    let color = document.getElementById('colors');
+                    for (let i = 0; i < teddy.colors.length; i++){
+                    let choixColor = document.createElement('option');
+                    choixColor.innerText = teddy.colors[i];
+                    color.appendChild(choixColor);
+                    }
+                }
+                coloris(teddy);
+                console.log(teddy);
+            }
+
+            theTeddy();
+
+            //stocker les données en localStorage
+            function recupStorageTeddy(){
+
+                let btn = document.querySelector(".add-teddy");
+                console.log(btn);
+
                 btn.addEventListener('click', () => {
                     let quantite = document.getElementById('quantite');
-                    let prixTotal = quantite.value * `${donnees.price}`;
-                    console.log(prixTotal);               
-                    });
-                    addTeddyAuPanier();
+                    teddy.prixTotal = quantite.value * `${teddy.price/100}`;
+                
+                    ajoutTeddy();                
+                })
+                
+                function ajoutTeddy() {            
+                    localStorage.setItem(teddyId, JSON.stringify(teddy));
+                    console.log(JSON.stringify(teddy));
+                    alert(`${quantite.value} oursons ${teddy.name} ajoutés à votre panier`);
+                    }
             }
-            calculQteTeddy();
 
-            function addTeddyAuPanier(){
-                let linkPanier = document.createElement('a');
-                linkPanier.href = `panier.html`;
-                theTeddy.appendChild(linkPanier);
-                } 
-
-            
-
-            function teddyStorage() {
-                console.log(donnees);
-                if(donnees != undefined || donnees != null){
-                    localStorage.setItem(teddyId, JSON.stringify(donnees));
-                    //console.log(teddyRecup);
-            
-                } else {
-                    alert(`l'accès n'est pas établi`)
-                };
-            }
-        teddyStorage();
-        }
-        )
-    }
-    
+            recupStorageTeddy();
+        })
+        .catch((error) => {
+            console.log(error);
+    })
+}
 
 teddyFetch();
 
-// async function recupTeddy() {
-//     await fetch('http://localhost:3000/api/teddies/' + teddyId)
-//     .then(response => response.json())
-//     .then(donnees => {
-//         //const teddyRecup = donnees;
-
-//     }
-// )}
-// recupTeddy()}

@@ -2,15 +2,15 @@
 
 const teddies = document.getElementById('nounours');
 
-
+//recupération des données de l'API
 fetch('http://localhost:3000/api/teddies')
-    .then(response => response.json())
-    .then(donnees => {
 
+    .then(response => response.json())
+
+    .then(donnees => {
 
     for (let i = 0; i < donnees.length; i++) {
         let newCardTeddy = document.createElement('div');
-
         newCardTeddy.className = `col-12 col-md-5`;
         newCardTeddy.style.alignItems = `center`;
         newCardTeddy.style.cursor = `pointer`;
@@ -25,17 +25,14 @@ fetch('http://localhost:3000/api/teddies')
         let newColors = document.createElement('p');
         let newPrice = document.createElement('h3');
 
-        newName.innerText = donnees[i].name;
-        //newLink.dataset.id = donnees[i]._id;
+        newName.innerText = `${donnees[i].name}`;
         newLink.href = `produits.html?id=${donnees[i]._id}`;
-        console.log(newLink);
-        //newId.innerText = donnees[i]._id;
-        //newId.style.display = 'none';
-        newPrice.innerText = `${donnees[i].price} euros`;
+        newPrice.innerText = `${donnees[i].price/100} euros`;
         newPrice.style.textAlign = 'center';
+
         newColors.innerText = `Disponible dans les coloris : ${donnees[i].colors}`;
         newColors.style.textAlign = 'center';
-        newImageUrl.src = donnees[i].imageUrl;
+        newImageUrl.src = `${donnees[i].imageUrl}`;
         newImageUrl.style.maxWidth = '100%';
         newImageUrl.style.objectFit = 'cover';
         newImageUrl.style.padding = '0.5em';
@@ -48,12 +45,7 @@ fetch('http://localhost:3000/api/teddies')
         newLink.insertAdjacentElement('afterbegin', newName);
         newLink.insertAdjacentElement('afterbegin', newImageUrl);
         newLink.insertAdjacentElement('afterbegin', newId);
-
-        //const teddy = document.querySelector('.col-12 .col-md-5');
-
         }
-
-
     })
 
     .catch((error) => {

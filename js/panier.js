@@ -1,186 +1,49 @@
-// const teddyList = document.querySelector('.teddy-list');
-// //const teddyForm = document.querySelector('.teddy-form');
+console.log(localStorage);
 
-// let panier = localStorage.getItem("panier");
-// if (panier != null) 
+const tousLesTeddies = document.querySelector('#panier');
+console.log(tousLesTeddies);
+const montantTotal = document.querySelector('#montant');
 
-// localStorage.setItem('id','Chris');
-// var myName = localStorage.getItem('id');
-// myName
+//creation de variables de base pour la récupération du panier du localStorage
+let panierTeddies = [];
+let panier;
 
+const recupTeddies = function () {
 
-// let panier = JSON.parse(localStorage.getItem("panier")) // pour récupérer un tableau de données
+    let lignesPanier;
+    let prixTotalPanier = 0;
 
-// var tab = [1, 2, 3, 4];
-// localStorage.setItem("tab", JSON.stringify(tab));
+    for(let i = 0; i < localStorage.length; i++){
+        const key = localStorage.key(i);
+        let data = JSON.parse(localStorage.getItem(key));        
 
-// function initBasket() {
-//     var basket = localStorage.getItem("basket");
-//     if (basket != null) {
-//         return JSON.parse(basket);
-//     }else{
-//         return [];
-//     }
-// }
+        lignesPanier += 
+        `<tr>
+        <td><img src="${data.imageUrl}" width= 100px></td>
+        <td><p style="font-size: 1em;">${data._id}</p>
+        <td><p style="font-size: 1.5em;">${data.name}<p></td>
+        <td><h3 id="prix">${data.prixTotal}</h3></td>
+        </tr>`;
 
-// function addToBasket(teddy) {
-//     var basket = initBasket();
-//     var teddy = basket.find(teddy => teddy.id == id);
-//     teddy.quantity = 1;
-//     if()
-//     basket.push(teddy);
-//     saveBasket(basket);
-// }
+        prixTotalPanier += data.prixTotal;
+        console.log(prixTotalPanier);
+    }
 
-// function removeFromBasket (teddy) {
+    tousLesTeddies.innerHTML = lignesPanier;
 
-// }
+    let thePrix = document.createElement('td')
+    thePrix.style.fontSize = '1.8em';
+    thePrix.style.fontWeight = '600';
+    thePrix.style.textAlign = 'center';
+    thePrix.innerHTML = `Total du panier : ${prixTotalPanier} Euros`;
+    montantTotal.appendChild(thePrix);
 
-// function saveBasket(basket) {
-//     localStorage.setItem("basket", JSON.stringify(basket));
-// }
-
-
-
-
-// for (let i = 0; i < localStorage.length; i++) {
-//     let key = localStorage.key(i)
-//     console.log(key, localStorage.getItem(key))
-// }
-
-
-//const panier = async localStorage.storage.getItem("monTeddy");
-//let teddy = localStorage.getItem('teddy');
-//console.log(teddy)
-
-// var MonPanier = (function() {
-//     panier = [];
-//     function Teddy() {
-//         localStorage.getItem('teddy');
-//     }
-    
-//     function savepanier() {
-//     sessionStorage.setItem('MonPanier', JSON.stringify(panier));
-//     }
-    
-//     function loadpanier() {
-//     panier = JSON.parse(sessionStorage.getItem('MonPanier'));
-//     }
-//     if (sessionStorage.getItem("MonPanier") != null) {
-//     loadpanier();
-//     }
-    
-//     var obj = {};
-    
-//     obj.ajouter_produit_dans_panier = function(name, price, qte) {
-//     for(var item in panier) {
-//       if(panier[item].name === name) {
-//     panier[item].qte ++;
-//     savepanier();
-//     return;
-//       }
-//     }
-//     var item = new Item(name, price, qte);
-//     panier.push(item);
-//     savepanier();
-//     }
-    
-//     obj.setCountForItem = function(name, qte) {
-//     for(var i in panier) {
-//       if (panier[i].name === name) {
-//     panier[i].qte = qte;
-//     break;
-//       }
-//     }
-//     };
-    
-//     obj.enlever_produit_de_panier = function(name) {
-//       for(var item in panier) {
-//     if(panier[item].name === name) {
-//       panier[item].qte --;
-//       if(panier[item].qte === 0) {
-//     panier.splice(item, 1);
-//       }
-//       break;
-//     }
-//     }
-//     savepanier();
-//     }
-    
-//     obj.enlever_produit_de_panier_tous = function(name) {
-//     for(var item in panier) {
-//       if(panier[item].name === name) {
-//     panier.splice(item, 1);
-//     break;
-//       }
-//     }
-//     savepanier();
-//     }
-    
-//     obj.clearpanier = function() {
-//     panier = [];
-//     savepanier();
-//     }
-    
-//     obj.totalQte = function() {
-//     var totalQte = 0;
-//     for(var item in panier) {
-//       totalQte += panier[item].qte;
-//     }
-//     return totalQte;
-//     }
-    
-//     obj.totalpanier = function() {
-//     var totalpanier = 0;
-//     for(var item in panier) {
-//       totalpanier += panier[item].price * panier[item].qte;
-//     }
-//     return Number(totalpanier.toFixed(2));
-//     }
-    
-//     obj.listpanier = function() {
-//     var panierCopy = [];
-//     for(i in panier) {
-//       item = panier[i];
-//       itemCopy = {};
-//       for(p in item) {
-//     itemCopy[p] = item[p];
-//       }
-//       itemCopy.total = Number(item.prix * item.count).toFixed(2);
-//       panierCopy.push(itemCopy)
-//     }
-//     return panierCopy;
-//     }
-    
-//     return obj;
-//     })();
-
-const teddyParams = (new URL(document.location)).searchParams;
-const teddyId = teddyParams.get('id');
-console.log(teddyId);
-
-async function teddyFetch() {
-  await fetch('http://localhost:3000/api/teddies/' + teddyId)
-  .then(response => response.json())
-  .then(donnees => {
-
-  function teddyStorage() {
-    console.log(donnees);
-    if(donnees != undefined || donnees != null){
-        localStorage.getItem(teddyId);
-        //console.log(teddyRecup);
-
-    } else {
-        alert(`l'accès n'est pas établi`)
-    };
-  }
-  teddyStorage();
-
-})
+    return panier;
 }
 
-
-
+recupTeddies();
+panierTeddies.push(panier);
+console.log(panierTeddies);
 
 
 // formulaire
@@ -195,17 +58,16 @@ const inpVille = document.getElementById('ville');
 const allSpan = document.querySelectorAll('span');
 console.log(allSpan);
 
+//je teste chaque valeur d'input
 inpNom.addEventListener('input', (e) => {
     if(e.target.value.length >=3) {
         allSpan[0].style.display ="none";
     } else {
         allSpan[0].style.display ="inline";
     }
-
 })
 
 inpMail.addEventListener('input', (e) => {
-
     const regexMail = /\S+@\S+\.\S+/;
     if(e.target.value.search(regexMail) === 0) {
         allSpan[2].style.display ="none";
@@ -216,23 +78,38 @@ inpMail.addEventListener('input', (e) => {
 })
 
 inpCP.addEventListener('input', (e) => {
-
     const regexCP = /[0-9]/;
     if(e.target.value.search(regexCP) === 0) {
         allSpan[4].style.display ="none";
-
     } else if(e.target.value.search(regexCP) === -1) {
         allSpan[4].style.display ="inline";
     }
 })
 
 inpVille.addEventListener('input', (e) => {
-
     const regexVille = /[^0-9]/;
     if(e.target.value.search(regexVille) === 0) {
         allSpan[5].style.display ="none";
-
     } else if(e.target.value.search(regexVille) === -1) {
         allSpan[5].style.display ="inline";
     }
+})
+
+//je dois récupérer la valeur du cntact sous forme d'objet
+
+//envoi de la commande en POST via l'API
+let validation = document.querySelector('main');
+console.log(validation);
+let buttonEnvoi = document.querySelector('.valide-commande');
+console.log(buttonEnvoi);
+
+buttonEnvoi.addEventListener('submit', (e) => {
+    e.preventDefault();
+    fetch('http://localhost:3000/api/teddies',{
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(order)
+    })
 })
