@@ -1,100 +1,106 @@
 body {
-    font-family: handlee, serif;
+  font-family: handlee, serif;
 }
 
 .container {
-    margin: 0;
-    padding: 0;
-    width: 100%;
+  padding: 0;
+  width: 100%;
 }
 
 .row {
-    margin: 0;
-    justify-content: space-around;
+  margin: 0;
+  justify-content: space-around;
 }
 
 .navbar {
-    font-size: 1.5em;
-    text-align: center;
+  font-size: 1.5em;
+  text-align: center;
 }
 
 .nav-link {
-    padding: 0;
+  padding: 0;
 }
 
 .nav-item .bi {
-    text-align: center;
+  text-align: center;
 }
 
 .navbar-brand {
-    & img {
-        width: 80%;
-        height: auto;
-    }
+  & img {
+    width: 80%;
+    height: auto;
+  }
 }
 
 .title {
-    font-size: 1.8em;
-    font-weight: 800;
-    margin: 0.8em;
-    text-align: center;
+  font-size: 1.8em;
+  font-weight: 800;
+  margin: 0.8em;
+  text-align: center;
 }
 
 .card {
-    margin: 1em;
+  margin: 1em;
 }
 
 h2 {
-    text-align: center;
-    font-weight: 600;
-    font-size: 2em;
+  text-align: center;
+  font-weight: 600;
+  font-size: 2em;
 }
 
+table {
+  padding: 0;
+  width: 100%;
+}
 
+.affichagepanier {
+  width: 100%;
+}
 
 .coordonnees {
-    padding: 1em;
-    margin: 0.8em;
-    border: 1px solid black;
+  padding: 1em;
+  margin: 0.8em;
+  border: 1px solid black;
 }
 
 .style_input {
-    width: 100%;
-    height: 1em;
-    font-size: 2em;
-    margin-bottom: 0.5em;
+  width: 100%;
+  height: 1em;
+  font-size: 2em;
+  margin-bottom: 0.5em;
 }
 
 .list-inline-item {
-    font-size: 1.5em;
-    font-weight: 600;
+  font-size: 1.5em;
+  font-weight: 600;
 }
 
 @media (min-width: 992px) {
-    .navbar {
-        text-align: left;
-    }
+  .navbar {
+    text-align: left;
+  }
 
-    .col12 .col-md-6 {
-        border: 0.8px solid black;
-        margin: 1em;
-    }
+  .col12 .col-md-6 {
+    border: 0.8px solid black;
+    margin: 1em;
+  }
 }
 
 /* animation */
 
 .active-teddy {
-    transition: all 0.3s, ease;
+  transition: all 0.3s, ease;
 }
 .active-contenu {
-    animation: clear 0.5s forwards;
+  animation: clear 0.5s forwards;
 }
 
 @keyframes clear {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

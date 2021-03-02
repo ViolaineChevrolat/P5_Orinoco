@@ -5,8 +5,8 @@ console.log(tousLesTeddies);
 const montantTotal = document.querySelector('#montant');
 
 //creation de variables de base pour la récupération du panier du localStorage
-let panierTeddies = [];
-let panier;
+let products = [];
+let teddy;
 
 const recupTeddies = function () {
 
@@ -18,32 +18,35 @@ const recupTeddies = function () {
         let data = JSON.parse(localStorage.getItem(key));        
 
         lignesPanier += 
-        `<tr>
-        <td><img src="${data.imageUrl}" width= 100px></td>
-        <td><p style="font-size: 1em;">${data._id}</p>
-        <td><p style="font-size: 1.5em;">${data.name}<p></td>
-        <td><h3 id="prix">${data.prixTotal}</h3></td>
+        `<tr width= 100%>
+        <td width= 25%><img src="${data.imageUrl}" width= 100%></td>
+        <td width= 25%><p style="font-size: 1em;">${data._id}</p>
+        <td width= 25%><p style="font-size: 1.2em;">${data.name}<p></td>
+        <td width= 25%><h3 id="prix">${data.prixTotal}</h3></td>
         </tr>`;
 
         prixTotalPanier += data.prixTotal;
-        console.log(prixTotalPanier);
+
+        products.push(data._id);
+    }
+    
+    if(localStorage.length > 0){
+        tousLesTeddies.innerHTML = lignesPanier;
+    }else{
+        tousLesTeddies.innerHTML = `<h3>Votre panier est vide</h3>`;
     }
 
-    tousLesTeddies.innerHTML = lignesPanier;
-
     let thePrix = document.createElement('td')
-    thePrix.style.fontSize = '1.8em';
+    thePrix.style.fontSize = '1.2em';
     thePrix.style.fontWeight = '600';
     thePrix.style.textAlign = 'center';
     thePrix.innerHTML = `Total du panier : ${prixTotalPanier} Euros`;
     montantTotal.appendChild(thePrix);
-
-    return panier;
+    
 }
 
 recupTeddies();
-panierTeddies.push(panier);
-console.log(panierTeddies);
+console.log(products);
 
 
 // formulaire
@@ -95,21 +98,40 @@ inpVille.addEventListener('input', (e) => {
     }
 })
 
-//je dois récupérer la valeur du cntact sous forme d'objet
+let contact;
 
-//envoi de la commande en POST via l'API
-let validation = document.querySelector('main');
-console.log(validation);
 let buttonEnvoi = document.querySelector('.valide-commande');
-console.log(buttonEnvoi);
 
-buttonEnvoi.addEventListener('submit', (e) => {
-    e.preventDefault();
-    fetch('http://localhost:3000/api/teddies',{
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify(order)
-    })
+buttonEnvoi.addEventListener('click', (e) => {
+    if(e.target.value != null){
+        contact = {
+            lastName: inpPrenom.value,
+            firstName: inpNom.value,
+            address: inpVille.value,
+            city: inpRue.value,
+            email: inpMail.value
+        };
+
+        let ordreConfirme = {contact, products};
+
+        if(confirm(`Voulez-vous valider la commande ?`)){
+            fetch('http://localhost:3000/api/teddies/order', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(ordreConfirme)
+            })
+            .then(reponse => {
+                return reponse.json()
+            })
+            .then(reponse => { 
+                sessionStorage.setItem('order', reponse.orderId)
+                localStorage.clear();
+                location.href ="commande.html";               
+            })
+        }
+    } 
 })
+
